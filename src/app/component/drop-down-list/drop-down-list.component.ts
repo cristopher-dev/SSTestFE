@@ -23,4 +23,8 @@ export class DropDownListComponent implements OnInit {
       this.listItems = save;
     });
   }
+
+  selectionChange(event: any) {
+    console.log(event);
+  }
 }

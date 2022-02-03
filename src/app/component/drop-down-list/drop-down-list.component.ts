@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { TableData1Service } from '../service/table-data1.service';
+import { TableData2Service } from '../service/table-data2.service';
+import { TableData3Service } from '../service/table-data3.service';
 
 import { DropDownListService } from './service/drop-down-list.service';
 import { ITableType } from './interface/drop-down-list.interface';
@@ -9,10 +12,16 @@ import { ITableType } from './interface/drop-down-list.interface';
   styleUrls: ['./drop-down-list.component.css'],
 })
 export class DropDownListComponent implements OnInit {
+  @Output() dropDownListEmitter = new EventEmitter();
   public listItems: ITableType[] = [];
   public selectedValue = 0;
 
-  constructor(private dropDownListService: DropDownListService) {}
+  constructor(
+    private dropDownListService: DropDownListService,
+    private tableData1Service: TableData1Service,
+    private tableData2Service: TableData2Service,
+    private tableData3Service: TableData3Service
+  ) {}
 
   ngOnInit(): void {
     this.dropDownListService.getTables().subscribe((obs) => {
@@ -25,6 +34,27 @@ export class DropDownListComponent implements OnInit {
   }
 
   selectionChange(event: any) {
-    console.log(event);
+    switch (event.name) {
+      case 'Tabla 1':
+        this.tableData1Service.findAll().subscribe((obs) => {
+          this.dropDownListEmitter.emit(obs);
+        });
+        break;
+
+      case 'Tabla 2':
+        this.tableData2Service.findAll().subscribe((obs) => {
+          this.dropDownListEmitter.emit(obs);
+        });
+        break;
+
+      case 'Tabla 3':
+        this.tableData3Service.findAll().subscribe((obs) => {
+          this.dropDownListEmitter.emit(obs);
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 }

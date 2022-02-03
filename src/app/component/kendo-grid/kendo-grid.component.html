@@ -1,1 +1,96 @@
-<p>kendo-grid works!</p>
+<form novalidate #myForm="ngForm">
+  <kendo-grid
+    [kendoGridTemplateEditing]="createNewProduct"
+    [kendoGridBinding]="products"
+    [pageSize]="10"
+    [pageable]="true"
+    [sortable]="true"
+    [navigable]="true"
+    (save)="saveHandler($event)"
+    (remove)="removeHandler($event)"
+  >
+    <ng-template kendoGridToolbarTemplate>
+      <button
+        kendoGridAddCommand
+        type="button"
+        icon="k-icon k-i-plus-outline"
+        class="k-ca"
+      >
+        Agregar
+      </button>
+    </ng-template>
+
+    <kendo-grid-column field="ProductName" title="Product Name">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input
+          [(ngModel)]="dataItem.ProductName"
+          kendoGridFocusable
+          name="ProductName"
+          class="k-textbox k-input k-rounded-md"
+          required
+        />
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column field="UnitPrice" editor="numeric" title="Price">
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input
+          [(ngModel)]="dataItem.UnitPrice"
+          kendoGridFocusable
+          name="UnitPrice"
+          class="k-textbox k-input k-rounded-md"
+          type="number"
+        />
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column
+      field="Discontinued"
+      editor="boolean"
+      title="Discontinued"
+    >
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input
+          [(ngModel)]="dataItem.Discontinued"
+          kendoGridFocusable
+          name="Discontinued"
+          type="checkbox"
+        />
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-column
+      field="UnitsInStock"
+      editor="numeric"
+      title="Units In Stock"
+    >
+      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
+        <input
+          [(ngModel)]="dataItem.UnitsInStock"
+          kendoGridFocusable
+          name="UnitsInStock"
+          required
+          min="0"
+          max="999"
+          class="k-textbox k-input k-rounded-md"
+          type="number"
+        />
+      </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-command-column title="Acciones">
+      <ng-template kendoGridCellTemplate let-isNew="isNew">
+        <button kendoGridEditCommand type="button" [primary]="true">
+          Edit
+        </button>
+        <button kendoGridRemoveCommand type="button">Remove</button>
+        <button kendoGridSaveCommand type="button" [disabled]="false">
+          {{ isNew ? "Add" : "Update" }}
+        </button>
+        <button kendoGridCancelCommand type="button">
+          {{ isNew ? "Discard changes" : "Cancel" }}
+        </button>
+      </ng-template>
+    </kendo-grid-command-column>
+  </kendo-grid>
+</form>

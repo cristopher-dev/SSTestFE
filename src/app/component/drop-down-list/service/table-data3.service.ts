@@ -1,9 +1,14 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TableData3Service {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor() { }
+  create() {}
+  findAll() {}
+  update() {}
+  remove() {}
 }

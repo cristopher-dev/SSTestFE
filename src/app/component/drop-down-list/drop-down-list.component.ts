@@ -1,7 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { TableData1Service } from '../service/table-data1.service';
-import { TableData2Service } from '../service/table-data2.service';
-import { TableData3Service } from '../service/table-data3.service';
+import { TableDataService } from '../service/table-data.service';
 
 import { DropDownListService } from './service/drop-down-list.service';
 import { ITableType } from './interface/drop-down-list.interface';
@@ -19,9 +17,7 @@ export class DropDownListComponent implements OnInit {
 
   constructor(
     private dropDownListService: DropDownListService,
-    private tableData1Service: TableData1Service,
-    private tableData2Service: TableData2Service,
-    private tableData3Service: TableData3Service
+    private TableDataService: TableDataService
   ) {}
 
   ngOnInit(): void {
@@ -37,10 +33,11 @@ export class DropDownListComponent implements OnInit {
       this.tableDetail = obs;
       const columnNames = this.columnName(obs[this.selectedValue].columns);
 
-      this.tableData1Service.findAll().subscribe((obs: any) => {
+      this.TableDataService.findAll('table-data1').subscribe((obs: any) => {
         this.dropDownListEmitter.emit({
           table: obs,
           columnNames,
+          tableDetail: this.tableDetail[this.selectedValue],
         });
       });
     });
@@ -67,10 +64,11 @@ export class DropDownListComponent implements OnInit {
 
         columnNames = this.columnName(this.tableDetail[index].columns);
 
-        this.tableData1Service.findAll().subscribe((obs: any) => {
+        this.TableDataService.findAll('table-data1').subscribe((obs: any) => {
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,
+            tableDetail: this.tableDetail[index],
           });
         });
         break;
@@ -82,10 +80,11 @@ export class DropDownListComponent implements OnInit {
 
         columnNames = this.columnName(this.tableDetail[index].columns);
 
-        this.tableData2Service.findAll().subscribe((obs: any) => {
+        this.TableDataService.findAll('table-data2').subscribe((obs: any) => {
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,
+            tableDetail: this.tableDetail[index],
           });
         });
         break;
@@ -97,10 +96,11 @@ export class DropDownListComponent implements OnInit {
 
         columnNames = this.columnName(this.tableDetail[index].columns);
 
-        this.tableData3Service.findAll().subscribe((obs: any) => {
+        this.TableDataService.findAll('table-data3').subscribe((obs: any) => {
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,
+            tableDetail: this.tableDetail[index],
           });
         });
         break;

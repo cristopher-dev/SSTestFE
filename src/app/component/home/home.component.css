@@ -34,6 +34,15 @@ body {
   padding: 0 0 0 0;
   margin: 2% 2% 2% 2%;
 }
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
 @media (max-width: 992px) {
   #right {
     flex-basis: 70%;

@@ -15,6 +15,7 @@ export class DropDownListComponent implements OnInit {
   @Output() dropDownListEmitter = new EventEmitter();
   public listItems: ITableType[] = [];
   public selectedValue = 0;
+  public tableDetail: any[] = [];
 
   constructor(
     private dropDownListService: DropDownListService,
@@ -32,11 +33,15 @@ export class DropDownListComponent implements OnInit {
       this.listItems = save;
     });
 
-    this.tableData1Service.findAll().subscribe((obs: any) => {
-      const columnNames = this.columnName(obs);
-      this.dropDownListEmitter.emit({
-        table: obs,
-        columnNames,
+    this.dropDownListService.getTableDetail().subscribe((obs: any[]) => {
+      this.tableDetail = obs;
+      const columnNames = this.columnName(obs[this.selectedValue].columns);
+
+      this.tableData1Service.findAll().subscribe((obs: any) => {
+        this.dropDownListEmitter.emit({
+          table: obs,
+          columnNames,
+        });
       });
     });
   }
@@ -44,16 +49,25 @@ export class DropDownListComponent implements OnInit {
   columnName(data: any[]) {
     let saveKey: any = [];
 
-    data.forEach((value) => saveKey.push(...Object.keys(value)));
+    data.forEach((value) => saveKey.push(value.header));
 
     return [...new Set(saveKey)].map((value) => ({ field: value }));
   }
 
   selectionChange(event: any) {
+    let name = '';
+    let index = 0;
+    let columnNames: any[] = [];
+
     switch (event.name) {
       case 'Tabla 1':
+        name = 'Tabla 1';
+
+        index = this.tableDetail.findIndex((value) => value.name === name);
+
+        columnNames = this.columnName(this.tableDetail[index].columns);
+
         this.tableData1Service.findAll().subscribe((obs: any) => {
-          const columnNames = this.columnName(obs);
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,
@@ -62,8 +76,13 @@ export class DropDownListComponent implements OnInit {
         break;
 
       case 'Tabla 2':
+        name = 'Tabla 2';
+
+        index = this.tableDetail.findIndex((value) => value.name === name);
+
+        columnNames = this.columnName(this.tableDetail[index].columns);
+
         this.tableData2Service.findAll().subscribe((obs: any) => {
-          const columnNames = this.columnName(obs);
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,
@@ -72,8 +91,13 @@ export class DropDownListComponent implements OnInit {
         break;
 
       case 'Tabla 3':
+        name = 'Tabla 3';
+
+        index = this.tableDetail.findIndex((value) => value.name === name);
+
+        columnNames = this.columnName(this.tableDetail[index].columns);
+
         this.tableData3Service.findAll().subscribe((obs: any) => {
-          const columnNames = this.columnName(obs);
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,

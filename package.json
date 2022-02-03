@@ -25,7 +25,7 @@
     "@progress/kendo-angular-inputs": "^8.0.0",
     "@progress/kendo-angular-intl": "^3.0.0",
     "@progress/kendo-angular-l10n": "^3.0.0",
-    "@progress/kendo-angular-popup": "^4.0.3",
+    "@progress/kendo-angular-popup": "^4.0.0",
     "@progress/kendo-angular-treeview": "^6.0.0",
     "@progress/kendo-drawing": "^1.0.0",
     "@progress/kendo-licensing": "^1.0.2",

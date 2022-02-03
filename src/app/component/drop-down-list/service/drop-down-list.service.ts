@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { environment } from 'src/environments/environment';
+
 import {
   ITableStructure,
   ITableType,
@@ -9,7 +12,7 @@ import {
   providedIn: 'root',
 })
 export class DropDownListService {
-  url = 'http://localhost:3000/';
+  url = environment.host;
 
   constructor(private httpClient: HttpClient) {}
 

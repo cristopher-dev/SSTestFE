@@ -1,7 +1,7 @@
 <form novalidate #myForm="ngForm">
   <kendo-grid
     [kendoGridTemplateEditing]="createNewProduct"
-    [kendoGridBinding]="products"
+    [kendoGridBinding]="data.table"
     [pageSize]="10"
     [pageable]="true"
     [sortable]="true"
@@ -20,60 +20,18 @@
       </button>
     </ng-template>
 
-    <kendo-grid-column field="ProductName" title="Product Name">
-      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
-        <input
-          [(ngModel)]="dataItem.ProductName"
-          kendoGridFocusable
-          name="ProductName"
-          class="k-textbox k-input k-rounded-md"
-          required
-        />
-      </ng-template>
-    </kendo-grid-column>
-
-    <kendo-grid-column field="UnitPrice" editor="numeric" title="Price">
-      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
-        <input
-          [(ngModel)]="dataItem.UnitPrice"
-          kendoGridFocusable
-          name="UnitPrice"
-          class="k-textbox k-input k-rounded-md"
-          type="number"
-        />
-      </ng-template>
-    </kendo-grid-column>
-
     <kendo-grid-column
-      field="Discontinued"
-      editor="boolean"
-      title="Discontinued"
+      [field]="item.field"
+      [title]="item.field"
+      *ngFor="let item of data.columnNames"
     >
       <ng-template kendoGridEditTemplate let-dataItem="dataItem">
         <input
-          [(ngModel)]="dataItem.Discontinued"
+          [(ngModel)]="dataItem[item.field]"
           kendoGridFocusable
-          name="Discontinued"
-          type="checkbox"
-        />
-      </ng-template>
-    </kendo-grid-column>
-
-    <kendo-grid-column
-      field="UnitsInStock"
-      editor="numeric"
-      title="Units In Stock"
-    >
-      <ng-template kendoGridEditTemplate let-dataItem="dataItem">
-        <input
-          [(ngModel)]="dataItem.UnitsInStock"
-          kendoGridFocusable
-          name="UnitsInStock"
-          required
-          min="0"
-          max="999"
+          [name]="item.field"
           class="k-textbox k-input k-rounded-md"
-          type="number"
+          required
         />
       </ng-template>
     </kendo-grid-column>

@@ -31,25 +31,53 @@ export class DropDownListComponent implements OnInit {
 
       this.listItems = save;
     });
+
+    this.tableData1Service.findAll().subscribe((obs: any) => {
+      const columnNames = this.columnName(obs);
+      this.dropDownListEmitter.emit({
+        table: obs,
+        columnNames,
+      });
+    });
+  }
+
+  columnName(data: any[]) {
+    let saveKey: any = [];
+
+    data.forEach((value) => saveKey.push(...Object.keys(value)));
+
+    return [...new Set(saveKey)].map((value) => ({ field: value }));
   }
 
   selectionChange(event: any) {
     switch (event.name) {
       case 'Tabla 1':
-        this.tableData1Service.findAll().subscribe((obs) => {
-          this.dropDownListEmitter.emit(obs);
+        this.tableData1Service.findAll().subscribe((obs: any) => {
+          const columnNames = this.columnName(obs);
+          this.dropDownListEmitter.emit({
+            table: obs,
+            columnNames,
+          });
         });
         break;
 
       case 'Tabla 2':
-        this.tableData2Service.findAll().subscribe((obs) => {
-          this.dropDownListEmitter.emit(obs);
+        this.tableData2Service.findAll().subscribe((obs: any) => {
+          const columnNames = this.columnName(obs);
+          this.dropDownListEmitter.emit({
+            table: obs,
+            columnNames,
+          });
         });
         break;
 
       case 'Tabla 3':
-        this.tableData3Service.findAll().subscribe((obs) => {
-          this.dropDownListEmitter.emit(obs);
+        this.tableData3Service.findAll().subscribe((obs: any) => {
+          const columnNames = this.columnName(obs);
+          this.dropDownListEmitter.emit({
+            table: obs,
+            columnNames,
+          });
         });
         break;
 

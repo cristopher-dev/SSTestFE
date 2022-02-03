@@ -6,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  data = [];
   constructor() {}
 
   ngOnInit(): void {}
 
   dropDownListEmitter(event: any) {
-    console.log(event);
+    this.data = event;
   }
 }

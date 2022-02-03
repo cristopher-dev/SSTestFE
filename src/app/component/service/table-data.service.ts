@@ -11,23 +11,19 @@ export class TableDataService {
 
   constructor(private httpClient: HttpClient) {}
 
-  create(body: any, pathname: string) {
-    // return this.httpClient.post(this.url + 'table-data1', body);
+  create(pathname: string, body: any) {
     return this.httpClient.post(this.url + pathname, body);
   }
 
   findAll(pathname: string) {
-    // return this.httpClient.get(this.url + 'table-data1');
     return this.httpClient.get(this.url + pathname);
   }
 
-  update(id: any, body: any, pathname: string) {
-    // return this.httpClient.patch(this.url + 'table-data1/' + id, body);
-    return this.httpClient.patch(this.url + pathname + id, body);
+  update(pathname: string, id: any, body: any) {
+    return this.httpClient.patch(this.url + pathname + '/' + id, body);
   }
 
-  remove(id: any, pathname: string) {
-    // return this.httpClient.delete(this.url + 'table-data1/' + id);
-    return this.httpClient.delete(this.url + pathname + id);
+  remove(pathname: string, id: any) {
+    return this.httpClient.delete(this.url + pathname + '/' + id);
   }
 }

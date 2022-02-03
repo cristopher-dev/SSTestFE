@@ -33,7 +33,7 @@ export class DropDownListComponent implements OnInit {
       this.tableDetail = obs;
       const columnNames = this.columnName(obs[this.selectedValue].columns);
 
-      this.TableDataService.findAll('table-data1').subscribe((obs: any) => {
+      this.TableDataService.findAll('tabla-1').subscribe((obs: any) => {
         this.dropDownListEmitter.emit({
           table: obs,
           columnNames,
@@ -64,7 +64,7 @@ export class DropDownListComponent implements OnInit {
 
         columnNames = this.columnName(this.tableDetail[index].columns);
 
-        this.TableDataService.findAll('table-data1').subscribe((obs: any) => {
+        this.TableDataService.findAll('tabla-1').subscribe((obs: any) => {
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,
@@ -80,7 +80,7 @@ export class DropDownListComponent implements OnInit {
 
         columnNames = this.columnName(this.tableDetail[index].columns);
 
-        this.TableDataService.findAll('table-data2').subscribe((obs: any) => {
+        this.TableDataService.findAll('tabla-2').subscribe((obs: any) => {
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,
@@ -96,7 +96,7 @@ export class DropDownListComponent implements OnInit {
 
         columnNames = this.columnName(this.tableDetail[index].columns);
 
-        this.TableDataService.findAll('table-data3').subscribe((obs: any) => {
+        this.TableDataService.findAll('tabla-3').subscribe((obs: any) => {
           this.dropDownListEmitter.emit({
             table: obs,
             columnNames,

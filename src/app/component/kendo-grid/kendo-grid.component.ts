@@ -29,7 +29,7 @@ export class KendoGridComponent {
         },
         (err) => {
           this.refresh(pathname);
-          this.message = err.error.text;
+          this.message = err.error.message;
           this.opened = true;
         }
       );
@@ -43,7 +43,7 @@ export class KendoGridComponent {
       },
       (err) => {
         this.refresh(pathname);
-        this.message = err.error.text;
+        this.message = err.error.message;
         this.opened = true;
       }
     );

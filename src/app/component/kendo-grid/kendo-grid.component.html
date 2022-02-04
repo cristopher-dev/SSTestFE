@@ -38,19 +38,37 @@
 
     <kendo-grid-command-column title="Acciones">
       <ng-template kendoGridCellTemplate let-isNew="isNew">
-        <button kendoGridEditCommand type="button" [primary]="true">
-          Edit
+        <button
+          kendoGridEditCommand
+          type="button"
+          [primary]="true"
+          icon="k-i-edit k-i-pencil"
+        >
+          editar
         </button>
-        <button kendoGridRemoveCommand type="button">Remove</button>
-        <button kendoGridSaveCommand type="button" [disabled]="false">
-          {{ isNew ? "Add" : "Update" }}
+        <button
+          kendoGridRemoveCommand
+          type="button"
+          icon="k-i-delete k-i-trash"
+        >
+          Eliminar
         </button>
-        <button kendoGridCancelCommand type="button">
-          {{ isNew ? "Discard changes" : "Cancel" }}
+        <button
+          kendoGridSaveCommand
+          type="button"
+          [disabled]="false"
+          icon="k-i-save k-i-floppy"
+        >
+          {{ isNew ? "agregar" : "actualizar" }}
+        </button>
+        <button
+          kendoGridCancelCommand
+          type="button"
+          icon="k-i-close-circle k-i-x-circle"
+        >
+          {{ isNew ? "Descartar" : "Cancelar" }}
         </button>
       </ng-template>
     </kendo-grid-command-column>
   </kendo-grid>
 </form>
-
-<app-dialogs [message]="message" [opened]="opened"></app-dialogs>

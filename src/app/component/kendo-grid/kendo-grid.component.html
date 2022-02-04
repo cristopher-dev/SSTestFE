@@ -18,6 +18,10 @@
       >
         Agregar
       </button>
+      <span>Información > </span>
+      <div *ngFor="let item of this.data.tableDetail.columns">
+        <span>{{ item.header }}:{{ item.dataType }}</span>
+      </div>
     </ng-template>
 
     <kendo-grid-column

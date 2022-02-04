@@ -25,9 +25,10 @@ export class KendoGridComponent {
     if (e.isNew) {
       this.tableDataService.create(pathname, body).subscribe(
         (obs: any) => {
-          console.log();
+          this.refresh(pathname);
         },
         (err) => {
+          this.refresh(pathname);
           this.message = err.error.text;
           this.opened = true;
         }
@@ -36,7 +37,16 @@ export class KendoGridComponent {
       return;
     }
 
-    this.tableDataService.update(pathname, id, body).subscribe((obs) => {});
+    this.tableDataService.update(pathname, id, body).subscribe(
+      (obs: any) => {
+        this.refresh(pathname);
+      },
+      (err) => {
+        this.refresh(pathname);
+        this.message = err.error.text;
+        this.opened = true;
+      }
+    );
   }
 
   removeHandler(e: any) {
@@ -45,5 +55,10 @@ export class KendoGridComponent {
     const id = e.dataItem.id;
 
     this.tableDataService.remove(pathname, id).subscribe(() => {});
+  }
+  refresh(pathname: string) {
+    this.tableDataService.findAll(pathname).subscribe((obs: any) => {
+      this.data.table = obs;
+    });
   }
 }

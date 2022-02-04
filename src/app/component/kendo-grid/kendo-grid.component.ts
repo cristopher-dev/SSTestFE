@@ -8,7 +8,9 @@ import { TableDataService } from '../service/table-data.service';
   styleUrls: ['./kendo-grid.component.css'],
 })
 export class KendoGridComponent {
-  @Input() data: any = [];
+  @Input() data: any = {};
+  message: string = '';
+  opened: boolean = false;
 
   constructor(private tableDataService: TableDataService) {}
 
@@ -26,7 +28,8 @@ export class KendoGridComponent {
           console.log();
         },
         (err) => {
-          console.log();
+          this.message = err.error.text;
+          this.opened = true;
         }
       );
 

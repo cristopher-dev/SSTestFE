@@ -1,0 +1,15 @@
+<button kendoButton *ngIf="!opened">Open dialog</button>
+<kendo-dialog
+  title="Advertencia"
+  *ngIf="opened"
+  (close)="close('cancel')"
+  [minWidth]="250"
+  [width]="450"
+>
+  <p style="margin: 30px; text-align: center">
+    {{ message }}
+  </p>
+  <kendo-dialog-actions>
+    <button kendoButton (click)="close('no')">ok</button>
+  </kendo-dialog-actions>
+</kendo-dialog>

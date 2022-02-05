@@ -20,7 +20,10 @@
       </button>
       <span>Información > </span>
       <div *ngFor="let item of this.data.tableDetail.columns">
-        <span>{{ item.header }}:{{ item.dataType }}</span>
+        <span
+          >{{ item.header }} : {{ item.dataType }}
+          {{ item.format ? item.format : "" }}
+        </span>
       </div>
     </ng-template>
 

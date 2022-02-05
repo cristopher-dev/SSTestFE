@@ -22,6 +22,7 @@ export class KendoGridComponent {
     const pathname = this.data.tableDetail.name.replace(' ', '-').toLowerCase();
     const body = e.dataItem;
     const id = e.dataItem.id;
+    this.opened = false;
     if (e.isNew) {
       this.tableDataService.create(pathname, body).subscribe(
         (obs: any) => {

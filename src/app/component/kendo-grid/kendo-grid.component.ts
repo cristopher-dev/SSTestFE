@@ -19,6 +19,8 @@ export class KendoGridComponent {
   }
 
   saveHandler(e: any) {
+    this.selectDate(e.dataItem);
+
     const pathname = this.data.tableDetail.name.replace(' ', '-').toLowerCase();
     let body = e.dataItem;
     const id = e.dataItem.id;
@@ -71,5 +73,43 @@ export class KendoGridComponent {
     this.tableDataService.findAll(pathname).subscribe((obs: any) => {
       this.data.table = obs;
     });
+  }
+
+  selectDate(dataItem: any) {
+    const format = this.data.tableDetail.columns.filter((v: any) => v.format);
+    const dateFormat = format[0].format;
+
+    switch (dateFormat) {
+      case 'HH:mm:ss':
+        this.formatHhMmSs(dataItem, format);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  formatHhMmSs(dataItem: any, format: any) {
+    const splitDate = dataItem[format[0].header].split(':');
+
+    if (splitDate.length < 3) {
+      throw new Error('date erro');
+      return;
+    }
+
+    const [hh, mm, ss] = splitDate;
+
+    const date = new Date();
+    date.setHours(hh);
+    date.setMinutes(mm);
+    date.setSeconds(ss);
+
+    dataItem[format[0].header] = date.toISOString();
+  }
+
+  formatYyyyMmDd(dataItem: any, format: any) {
+    const column = dataItem[format[0].header];
+
+    dataItem[format[0].header] = new Date(column).toISOString();
   }
 }

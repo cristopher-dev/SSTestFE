@@ -20,9 +20,19 @@ export class KendoGridComponent {
 
   saveHandler(e: any) {
     const pathname = this.data.tableDetail.name.replace(' ', '-').toLowerCase();
-    const body = e.dataItem;
+    let body = e.dataItem;
     const id = e.dataItem.id;
     this.opened = false;
+
+    Object.keys(e.dataItem).forEach((v: string) => {
+      if (body[v]) {
+        body[v] = body[v] + '';
+        return;
+      }
+
+      delete body[v];
+    });
+
     if (e.isNew) {
       this.tableDataService.create(pathname, body).subscribe(
         (obs: any) => {

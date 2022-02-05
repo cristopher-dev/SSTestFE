@@ -11,6 +11,7 @@ export class KendoGridComponent {
   @Input() data: any = {};
   message: string = '';
   opened: boolean = false;
+  pathnames: string = '';
 
   constructor(private tableDataService: TableDataService) {}
 
@@ -22,6 +23,7 @@ export class KendoGridComponent {
     this.selectDate(e.dataItem);
 
     const pathname = this.data.tableDetail.name.replace(' ', '-').toLowerCase();
+    this.pathnames = pathname;
     let body = e.dataItem;
     const id = e.dataItem.id;
     this.opened = false;
@@ -93,7 +95,7 @@ export class KendoGridComponent {
     const splitDate = dataItem[format[0].header].split(':');
 
     if (splitDate.length < 3) {
-      throw new Error('date erro');
+      this.refresh(this.pathnames);
       return;
     }
 

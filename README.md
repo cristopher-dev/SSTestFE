@@ -1,4 +1,4 @@
-# info español
+# info español front-end
 
 - toda la información que se pinta es dinámica
 - en la carpeta de environments esta la variables
@@ -8,7 +8,7 @@
 
 - npm start para correr el servidor en modo de desarrollo si necesita los estático npm run build para production
 
-# info english
+# info english front-end
 
 - all the information that is painted is dynamic
 - in the environments folder are the variables
